@@ -33,5 +33,30 @@ namespace LeetCodeTest
             }
             return result;
         }
+        /// <summary>
+        /// 求数组中相加之和等于目标数的两个元素的下标
+        /// 利用字典降低时间复杂度，牺牲空间复杂度，得以优化
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public int[] GetTwoSum2(int[] nums, int target)
+        {
+            Dictionary<int, int> dic = new Dictionary<int, int>();
+            for (int i = 0; i < nums.Length; i++)
+            {
+                int complement = target - nums[i];
+                if (dic.ContainsKey(complement))
+                {
+                    return new int[] { dic[complement], i };
+                }
+                //这一步舍弃相同的元素
+                if (!dic.ContainsKey(nums[i]))
+                {
+                    dic.Add(nums[i], i);
+                }
+            }
+            return null;
+        }
     }
 }
